@@ -45,7 +45,24 @@
 <?php if ($tasks)
     foreach ($tasks as $task) { ?>
         <div class="card" style="margin-top:20px">
-            <div class="card-header">
+            <div class="card-header d-block d-sm-none">
+                <ul class="list-group">
+                    <li class="list-group-item"><?php echo $task['user_name']; ?></li>
+                    <li class="list-group-item"><?php echo $task['email']; ?></li>
+                    <li class="list-group-item">
+                        <?php
+                        if ($task['state'] == '1')
+                            echo '<span class="badge badge-pill badge-secondary">Новая</span>';
+                        elseif ($task['state'] == '2')
+                            echo '<span class="badge badge-pill badge-success">Выполнено</span>';
+                        ?>
+                    </li>
+                    <?php if ($task['original_task']!=$task['task']) { ?>
+                        <li class="list-group-item"><span class="badge badge-pill badge-info">отредактировано администратором</span></li>
+                    <?php } ?>
+                </ul>
+            </div>
+            <div class="card-header d-none d-sm-block">
                 <ul class="list-group list-group-horizontal">
                     <li class="list-group-item"><?php echo $task['user_name']; ?></li>
                     <li class="list-group-item"><?php echo $task['email']; ?></li>
